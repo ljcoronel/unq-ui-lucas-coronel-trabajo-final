@@ -8,11 +8,11 @@ const getDifficulties = () => axios.get(`/api/difficulties`, { baseURL })
 
 const getGameSession = (id) => axios.get(`/api/difficulties/${id}`, { baseURL })
     .then(response => response.data)
-    .catch(error => {throw Error(error.response.data.message)});
+    .catch(error => {if (error.response.status === 404) throw Error(error.response.data.message)});
 
 const checkWord = (sessionId, word) => axios.post(`/api/checkWord`, { sessionId, word }, { baseURL })
     .then(response => response.data)
-    .catch(error => {throw Error(error.response.data.message)});
+    .catch(error => {if (error.response.status === 400 || error.response.status === 404) throw Error(error.response.data.message)});
 
 export default {
     getDifficulties,
