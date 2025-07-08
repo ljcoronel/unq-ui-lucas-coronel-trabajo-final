@@ -1,8 +1,7 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from 'react';
+import './App.css';
 import {WordleProvider} from "./hooks/useWordleContext.jsx";
+import Wordle from "./components/Wordle.jsx";
 
 function App() {
 
@@ -10,9 +9,10 @@ function App() {
       <WordleProvider>
           <div className="App">
               <h1>Wordly|Wordle</h1>
+              <Wordle />
           </div>
       </WordleProvider>
   );
-};
+}
 
 export default App;

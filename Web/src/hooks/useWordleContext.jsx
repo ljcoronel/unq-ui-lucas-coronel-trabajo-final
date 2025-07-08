@@ -9,10 +9,10 @@ const WordleContext = createContext({
 });
 
 export const WordleProvider = ({ children }) => {
-    const [turn, setTurn] = useState(0);
-    const [currentGuess, setCurrentGuess] = useState("");
-    const [guesses, setGuesses] = useState([]);
-    const [history, setHistory] = useState([]);
+    const [turn, setTurn] = useState(0); //turno del 0 al 5
+    const [currentGuess, setCurrentGuess] = useState(""); //la palabra
+    const [guesses, setGuesses] = useState([]); //la estructura de la palabra por api
+    const [history, setHistory] = useState([]); //lista de palabras usadas
     const [isCorrect, setIsCorrect] = useState(false);
 
     const formatGuess = () => {};
