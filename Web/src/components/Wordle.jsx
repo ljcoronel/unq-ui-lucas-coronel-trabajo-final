@@ -4,10 +4,16 @@ import EasyWordle from "./EasyWordle.jsx";
 import MediumWordle from "./MediumWordle.jsx";
 import HardWordle from "./HardWordle.jsx";
 import ExpertWordle from "./ExpertWordle.jsx";
+import {useWordleContext} from "../hooks/useWordleContext.jsx";
 
 function Wordle() {
+    const { session , handleKeyup, currentGuess, newGame } = useWordleContext();
     const [difficulties, setDifficulties] = useState([]);
-    const [session, setSession] = useState({});
+
+    useEffect(() => {
+        document.addEventListener("keyup", handleKeyup);
+        return () => document.removeEventListener("keyup", handleKeyup);
+    }, [handleKeyup]);
 
     useEffect(() => {
         Api.getDifficulties()
@@ -17,7 +23,7 @@ function Wordle() {
 
     const handleDifficulty = (id) => {
         Api.getGameSession(id)
-            .then((response) => setSession(response))
+            .then((response) => newGame(response))
             .catch(e => console.log(e.message));
     }
 
@@ -39,6 +45,7 @@ function Wordle() {
             ) : session.wordLenght === 7 && (
                 <ExpertWordle />
             )}
+            <div>Current Guess - {currentGuess}</div>
         </div>
     )
 }
