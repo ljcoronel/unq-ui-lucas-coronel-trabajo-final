@@ -8,6 +8,7 @@ const WordleContext = createContext({
     guesses: [...Array(6)],
     history: [],
     isCorrect: false,
+    usedKeys: {},
 });
 
 export const WordleProvider = ({ children }) => {
@@ -17,9 +18,10 @@ export const WordleProvider = ({ children }) => {
     const [guesses, setGuesses] = useState([...Array(6)]); //la estructura de la palabra por api
     const [history, setHistory] = useState([]); //lista de palabras usadas
     const [isCorrect, setIsCorrect] = useState(false);
+    const [usedKeys, setUsedKeys] = useState({});
 
     const addNewGuess = () => {
-        Api.checkWord(session.sessionId, currentGuess)
+        Api.checkWord(session.sessionId, currentGuess.toLowerCase())
             .then((response) => {
                 setGuesses((prevGuesses) => {
                     const newGuesses = [...prevGuesses];
@@ -33,6 +35,24 @@ export const WordleProvider = ({ children }) => {
                 setTurn((prevTurn) => {
                     return (prevTurn + 1);
                 });
+                setUsedKeys((prevUsedKeys) => {
+                    response.forEach((l) => {
+                        const currentSolution = prevUsedKeys[l.letter];
+                        if (l.solution === "correct") {
+                            prevUsedKeys[l.letter] = "correct";
+                            return;
+                        }
+                        if (l.solution === "elsewhere" && currentSolution !== "correct") {
+                            prevUsedKeys[l.letter] = "elsewhere";
+                            return;
+                        }
+                        if (l.solution === "absent" && currentSolution !== ("correct" || "elsewhere")) {
+                            prevUsedKeys[l.letter] = "absent";
+                            return;
+                        }
+                    })
+                    return prevUsedKeys;
+                })
                 setCurrentGuess("");
             })
             .catch((e) => console.log("palabra incorrecta"));
@@ -44,7 +64,7 @@ export const WordleProvider = ({ children }) => {
                 console.log("usaste todos los intentos!");
                 return;
             }
-            if (history.includes(currentGuess)) {
+            if (history.includes(currentGuess.toLowerCase())) {
                 console.log("ya jugaste esta palabra!");
                 return;
             }
@@ -72,10 +92,11 @@ export const WordleProvider = ({ children }) => {
         setGuesses([...Array(6)]);
         setHistory([]);
         setIsCorrect(false);
+        setUsedKeys({});
     };
 
     return (
-        <WordleContext.Provider value={{ session, turn, currentGuess, guesses, isCorrect, handleKeyup, newGame }}>
+        <WordleContext.Provider value={{ session, turn, currentGuess, guesses, isCorrect, handleKeyup, newGame, usedKeys }}>
             {children}
         </WordleContext.Provider>
     );
