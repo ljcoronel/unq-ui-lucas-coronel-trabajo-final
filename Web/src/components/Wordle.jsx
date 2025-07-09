@@ -1,9 +1,9 @@
 import {useEffect, useState} from "react";
 import Api from "../services/Api.js";
-import EasyWordle from "./EasyWordle.jsx";
-import MediumWordle from "./MediumWordle.jsx";
-import HardWordle from "./HardWordle.jsx";
-import ExpertWordle from "./ExpertWordle.jsx";
+import EasyGrid from "./EasyGrid.jsx";
+import MediumGrid from "./MediumGrid.jsx";
+import HardGrid from "./HardGrid.jsx";
+import ExpertGrid from "./ExpertGrid.jsx";
 import {useWordleContext} from "../hooks/useWordleContext.jsx";
 
 function Wordle() {
@@ -37,13 +37,13 @@ function Wordle() {
             ))
             }
             {session && session.wordLenght === 4 ? (
-                <EasyWordle />
+                <EasyGrid />
             ) : session.wordLenght === 5 ? (
-                <MediumWordle />
+                <MediumGrid />
             ) : session.wordLenght === 6 ? (
-                <HardWordle />
+                <HardGrid />
             ) : session.wordLenght === 7 && (
-                <ExpertWordle />
+                <ExpertGrid />
             )}
             <div>Current Guess - {currentGuess}</div>
         </div>
