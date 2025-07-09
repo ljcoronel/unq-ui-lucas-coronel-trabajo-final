@@ -7,7 +7,7 @@ import ExpertWordle from "./ExpertWordle.jsx";
 import {useWordleContext} from "../hooks/useWordleContext.jsx";
 
 function Wordle() {
-    const { session , handleKeyup, currentGuess, newGame } = useWordleContext();
+    const { session , currentGuess, guesses, turn, isCorrect, handleKeyup, newGame } = useWordleContext();
     const [difficulties, setDifficulties] = useState([]);
 
     useEffect(() => {
@@ -31,7 +31,7 @@ function Wordle() {
         <div>
             <div>Seleccionar dificultad</div>
             {difficulties.map((difficulty) => (
-                <button type="button" className="btn btn-primary" onClick={() => handleDifficulty(difficulty.id)}>
+                <button key={difficulty.id} type="button" className="btn btn-primary" onClick={() => handleDifficulty(difficulty.id)}>
                     {difficulty.name}
                 </button>
             ))
