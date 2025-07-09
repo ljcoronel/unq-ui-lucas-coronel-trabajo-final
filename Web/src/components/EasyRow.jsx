@@ -1,4 +1,8 @@
-function EasyRow({ guess }) {
+import {useWordleContext} from "../hooks/useWordleContext.jsx";
+
+function EasyRow({ guess, currentTurn }) {
+    const { turn, currentGuess, session } = useWordleContext();
+
     if (guess) {
         return (
             <div className="row past">
@@ -6,6 +10,23 @@ function EasyRow({ guess }) {
                     <div key={i} className={l.solution}>
                         {l.letter}
                     </div>
+                ))}
+            </div>
+        );
+    }
+
+    if (turn === currentTurn && currentGuess) {
+        const letters = currentGuess.split("");
+
+        return (
+            <div className="row current">
+                {letters.map((letter, i) => (
+                    <div key={i} className="filled">
+                        {letter}
+                    </div>
+                ))}
+                {[...Array(session.wordLenght - letters.length)].map((_, i) => (
+                    <div key={i}></div>
                 ))}
             </div>
         );

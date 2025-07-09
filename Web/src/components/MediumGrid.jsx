@@ -7,7 +7,7 @@ function MediumGrid() {
     return (
         <div>
             {guesses.map((g, i) => {
-                return <MediumRow key={i} guess={g} />
+                return <MediumRow key={i} guess={g} currentTurn={i} />
             })}
         </div>
     );

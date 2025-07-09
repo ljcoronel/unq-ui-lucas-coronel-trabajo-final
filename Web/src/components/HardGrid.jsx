@@ -7,7 +7,7 @@ function HardGrid() {
     return (
         <div>
             {guesses.map((g, i) => {
-                return <HardRow key={i} guess={g} />
+                return <HardRow key={i} guess={g} currentTurn={i} />
             })}
         </div>
     );
