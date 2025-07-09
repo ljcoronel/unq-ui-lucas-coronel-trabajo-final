@@ -5,6 +5,7 @@ import MediumGrid from "./MediumGrid.jsx";
 import HardGrid from "./HardGrid.jsx";
 import ExpertGrid from "./ExpertGrid.jsx";
 import {useWordleContext} from "../hooks/useWordleContext.jsx";
+import Keypad from "./Keypad.jsx";
 
 function Wordle() {
     const { session , currentGuess, guesses, turn, isCorrect, handleKeyup, newGame } = useWordleContext();
@@ -45,6 +46,7 @@ function Wordle() {
             ) : session.wordLenght === 7 && (
                 <ExpertGrid />
             )}
+            <Keypad />
         </div>
     )
 }
