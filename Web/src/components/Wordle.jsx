@@ -45,7 +45,6 @@ function Wordle() {
             ) : session.wordLenght === 7 && (
                 <ExpertGrid />
             )}
-            <div>Current Guess - {currentGuess}</div>
         </div>
     )
 }
