@@ -28,3 +28,15 @@ h1 {
   font-weight: bold;
   font-size: 2.5em;
 }
+.row > div.correct {
+  background: #5ac85a;
+  background-color: #5ac85a;
+}
+.row > div.elsewhere {
+  background: #e2cc68;
+  background-color: #e2cc68;
+}
+.row > div.absent {
+  background: #a1a1a1;
+  background-color: #a1a1a1;
+}

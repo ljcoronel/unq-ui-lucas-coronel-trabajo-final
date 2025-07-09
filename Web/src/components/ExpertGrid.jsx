@@ -7,7 +7,7 @@ function ExpertGrid() {
     return (
         <div>
             {guesses.map((g, i) => {
-                return <ExpertRow key={i} />
+                return <ExpertRow key={i} guess={g} />
             })}
         </div>
     );

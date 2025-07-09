@@ -7,7 +7,7 @@ function EasyGrid() {
     return (
         <div>
             {guesses.map((g, i) => {
-                return <EasyRow key={i} />
+                return <EasyRow key={i} guess={g} />
             })}
         </div>
     );
