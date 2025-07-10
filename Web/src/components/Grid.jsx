@@ -1,16 +1,16 @@
 import {useWordleContext} from "../hooks/useWordleContext.jsx";
-import ExpertRow from "./ExpertRow.jsx";
+import Row from "./Row.jsx";
 
-function ExpertGrid() {
+function Grid() {
     const { guesses } = useWordleContext();
 
     return (
         <div>
             {guesses.map((g, i) => {
-                return <ExpertRow key={i} guess={g} currentTurn={i} />
+                return <Row key={i} guess={g} currentTurn={i} />
             })}
         </div>
     );
 }
 
-export default ExpertGrid;
+export default Grid;

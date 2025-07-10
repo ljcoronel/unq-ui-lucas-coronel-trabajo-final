@@ -2,8 +2,8 @@ import {useWordleContext} from "../hooks/useWordleContext.jsx";
 import PastRow from "./PastRow.jsx";
 import CurrentRow from "./CurrentRow.jsx";
 
-function ExpertRow({ guess, currentTurn }) {
-    const { turn, currentGuess } = useWordleContext();
+function Row({ guess, currentTurn }) {
+    const { turn, currentGuess, session } = useWordleContext();
 
     if (guess) {
         return (
@@ -20,15 +20,11 @@ function ExpertRow({ guess, currentTurn }) {
 
     return (
         <div className="row">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
+            {Array.from({ length: session.wordLenght }).map((_, i) => (
+                <div key={i} />
+            ))}
         </div>
     );
 }
 
-export default ExpertRow;
+export default Row;
