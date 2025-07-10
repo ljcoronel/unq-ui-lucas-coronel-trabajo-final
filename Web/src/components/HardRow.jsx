@@ -1,34 +1,20 @@
 import {useWordleContext} from "../hooks/useWordleContext.jsx";
+import PastRow from "./PastRow.jsx";
+import CurrentRow from "./CurrentRow.jsx";
 
 function HardRow({ guess, currentTurn }) {
-    const { turn, currentGuess, session } = useWordleContext();
+    const { turn, currentGuess } = useWordleContext();
 
     if (guess) {
         return (
-            <div className="row past">
-                {guess.map((l, i) => (
-                    <div key={i} className={l.solution}>
-                        {l.letter}
-                    </div>
-                ))}
-            </div>
+            <PastRow guess={guess} />
         );
     }
 
     if (turn === currentTurn && currentGuess) {
         const letters = currentGuess.split("");
-
         return (
-            <div className="row current">
-                {letters.map((letter, i) => (
-                    <div key={i} className="filled">
-                        {letter}
-                    </div>
-                ))}
-                {[...Array(session.wordLenght - letters.length)].map((_, i) => (
-                    <div key={i}></div>
-                ))}
-            </div>
+            <CurrentRow letters={letters} />
         );
     }
 
