@@ -2,7 +2,7 @@ import {useWordleContext} from "../hooks/useWordleContext.jsx";
 import ExpertRow from "./ExpertRow.jsx";
 
 function ExpertGrid() {
-    const { guesses, currentGuess, turn } = useWordleContext();
+    const { guesses } = useWordleContext();
 
     return (
         <div>

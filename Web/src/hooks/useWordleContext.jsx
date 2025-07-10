@@ -2,7 +2,7 @@ import {createContext, useContext, useState} from "react";
 import Api from "../services/Api.js";
 
 const WordleContext = createContext({
-    session: {sessionId: "", difficulty: {}, wordLenght: 0},
+    session: null,
     turn: 0,
     currentGuess: "",
     guesses: [...Array(6)],
@@ -12,7 +12,7 @@ const WordleContext = createContext({
 });
 
 export const WordleProvider = ({ children }) => {
-    const [session, setSession] = useState({sessionId: "", difficulty: {}, wordLenght: 0});
+    const [session, setSession] = useState(null);
     const [turn, setTurn] = useState(0); //turno del 0 al 5
     const [currentGuess, setCurrentGuess] = useState(""); //la palabra
     const [guesses, setGuesses] = useState([...Array(6)]); //la estructura de la palabra por api
@@ -48,7 +48,6 @@ export const WordleProvider = ({ children }) => {
                         }
                         if (l.solution === "absent" && currentSolution !== ("correct" || "elsewhere")) {
                             prevUsedKeys[l.letter] = "absent";
-                            return;
                         }
                     })
                     return prevUsedKeys;

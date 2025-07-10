@@ -2,7 +2,7 @@ import {useWordleContext} from "../hooks/useWordleContext.jsx";
 import EasyRow from "./EasyRow.jsx";
 
 function EasyGrid() {
-    const { guesses, currentGuess, turn } = useWordleContext();
+    const { guesses } = useWordleContext();
 
     return (
         <div>

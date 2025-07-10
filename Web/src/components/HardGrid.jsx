@@ -2,7 +2,7 @@ import {useWordleContext} from "../hooks/useWordleContext.jsx";
 import HardRow from "./HardRow.jsx";
 
 function HardGrid() {
-    const { guesses, currentGuess, turn } = useWordleContext();
+    const { guesses } = useWordleContext();
 
     return (
         <div>

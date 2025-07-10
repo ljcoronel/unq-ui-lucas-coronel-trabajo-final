@@ -2,7 +2,7 @@ import {useWordleContext} from "../hooks/useWordleContext.jsx";
 import MediumRow from "./MediumRow.jsx";
 
 function MediumGrid() {
-    const { guesses, currentGuess, turn } = useWordleContext();
+    const { guesses } = useWordleContext();
 
     return (
         <div>
