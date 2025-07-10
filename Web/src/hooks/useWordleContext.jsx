@@ -54,7 +54,7 @@ export const WordleProvider = ({ children }) => {
                 })
                 setCurrentGuess("");
             })
-            .catch((e) => console.log("palabra incorrecta"));
+            .catch((e) => console.log("Palabra no encontrada"));
     };
 
     const handleKeyup = ({ key }) => {
@@ -64,11 +64,11 @@ export const WordleProvider = ({ children }) => {
                 return;
             }
             if (history.includes(currentGuess.toLowerCase())) {
-                console.log("ya jugaste esta palabra!");
+                console.log("Ya jugaste esta palabra");
                 return;
             }
             if (currentGuess.length !== session.wordLenght) {
-                console.log("faltan letras!");
+                console.log("Una palabra demasiado corta");
                 return;
             }
             addNewGuess();

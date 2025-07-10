@@ -1,11 +1,8 @@
 import {useEffect, useState} from "react";
 import Api from "../services/Api.js";
-import EasyGrid from "./EasyGrid.jsx";
-import MediumGrid from "./MediumGrid.jsx";
-import HardGrid from "./HardGrid.jsx";
-import ExpertGrid from "./ExpertGrid.jsx";
 import {useWordleContext} from "../hooks/useWordleContext.jsx";
 import Keypad from "./Keypad.jsx";
+import Grid from "./Grid.jsx";
 
 function Wordle() {
     const { session , turn, isCorrect, handleKeyup, newGame } = useWordleContext();
@@ -51,11 +48,18 @@ function Wordle() {
             </div>
             {session && (
                 <div>
-                    {session.wordLenght === 4 && <EasyGrid />}
-                    {session.wordLenght === 5 && <MediumGrid />}
-                    {session.wordLenght === 6 && <HardGrid />}
-                    {session.wordLenght === 7 && <ExpertGrid />}
+                    <Grid />
                     <Keypad />
+                </div>
+            )}
+            {isCorrect && <div>¡Ganaste! 🏆</div>}
+            {!isCorrect && turn === 6 && <div>¡Perdiste!</div>}
+            {(isCorrect || turn === 6) && (
+                <div>
+                    <div>Volver a jugar en dificultad {session.difficulty.name}</div>
+                    <div>
+                        <button type="button" className="btn btn-primary" onClick={() => handleDifficulty(session.difficulty.id)}>Reiniciar</button>
+                    </div>
                 </div>
             )}
         </div>
