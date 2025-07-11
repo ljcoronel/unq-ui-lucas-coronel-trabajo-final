@@ -9,6 +9,8 @@ const WordleContext = createContext({
     history: [],
     isCorrect: false,
     usedKeys: {},
+    loading: false,
+    error: null,
 });
 
 export const WordleProvider = ({ children }) => {
@@ -19,6 +21,8 @@ export const WordleProvider = ({ children }) => {
     const [history, setHistory] = useState([]); //lista de palabras usadas
     const [isCorrect, setIsCorrect] = useState(false);
     const [usedKeys, setUsedKeys] = useState({});
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
 
     const addNewGuess = () => {
         Api.checkWord(session.sessionId, currentGuess.toLowerCase())
@@ -54,23 +58,26 @@ export const WordleProvider = ({ children }) => {
                 })
                 setCurrentGuess("");
             })
-            .catch((e) => console.log("Palabra no encontrada"));
+            .catch((e) => {
+                setError(e);
+                console.log(e.message)
+            })
+            .finally(() => setLoading(false));
     };
 
     const handleKeyup = ({ key }) => {
         if (key === "Enter") {
-            if (turn > 5) {
-                console.log("usaste todos los intentos!");
-                return;
-            }
             if (history.includes(currentGuess.toLowerCase())) {
+                setError(new Error("Ya usaste esta palabra"));
                 console.log("Ya jugaste esta palabra");
                 return;
             }
             if (currentGuess.length !== session.wordLenght) {
+                setError(new Error("Una palabra demasiado corta"));
                 console.log("Una palabra demasiado corta");
                 return;
             }
+            setLoading(true);
             addNewGuess();
         }
         if (key === "Backspace") {
@@ -92,10 +99,12 @@ export const WordleProvider = ({ children }) => {
         setHistory([]);
         setIsCorrect(false);
         setUsedKeys({});
+        setLoading(false);
+        setError(null);
     };
 
     return (
-        <WordleContext.Provider value={{ session, turn, currentGuess, guesses, isCorrect, handleKeyup, newGame, usedKeys }}>
+        <WordleContext.Provider value={{ session, turn, currentGuess, guesses, isCorrect, handleKeyup, newGame, usedKeys, loading, error }}>
             {children}
         </WordleContext.Provider>
     );
