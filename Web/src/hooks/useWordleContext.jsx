@@ -58,10 +58,7 @@ export const WordleProvider = ({ children }) => {
                 })
                 setCurrentGuess("");
             })
-            .catch((e) => {
-                setError(e);
-                console.log(e.message)
-            })
+            .catch((e) => setError(e))
             .finally(() => setLoading(false));
     };
 
@@ -69,12 +66,10 @@ export const WordleProvider = ({ children }) => {
         if (key === "Enter") {
             if (history.includes(currentGuess.toLowerCase())) {
                 setError(new Error("Ya usaste esta palabra"));
-                console.log("Ya jugaste esta palabra");
                 return;
             }
             if (currentGuess.length !== session.wordLenght) {
                 setError(new Error("Una palabra demasiado corta"));
-                console.log("Una palabra demasiado corta");
                 return;
             }
             setLoading(true);
