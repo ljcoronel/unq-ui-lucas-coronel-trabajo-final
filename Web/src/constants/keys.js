@@ -1,7 +1,7 @@
 const keys = [
-    {key: "a"}, {key: "b"}, {key: "c"}, {key: "d"}, {key: "e"}, {key: "f"}, {key: "g"}, {key: "h"}, {key: "i"}, {key: "j"},
-    {key: "k"}, {key: "l"}, {key: "m"}, {key: "n"}, {key: "ñ"}, {key: "o"}, {key: "p"}, {key: "q"}, {key: "r"}, {key: "s"},
-    {key: "t"}, {key: "u"}, {key: "v"}, {key: "w"}, {key: "x"}, {key: "y"}, {key: "z"}
+    {key: "Q"}, {key: "W"}, {key: "E"}, {key: "R"}, {key: "T"}, {key: "Y"}, {key: "U"}, {key: "I"}, {key: "O"}, {key: "P"},
+    {key: "A"}, {key: "S"}, {key: "D"}, {key: "F"}, {key: "G"}, {key: "H"}, {key: "J"}, {key: "K"}, {key: "L"}, {key: "Ñ"},
+    {key: "Backspace"}, {key: "Z"}, {key: "X"}, {key: "C"}, {key: "V"}, {key: "B"}, {key: "N"}, {key: "M"}, {key: "Enter"}
 ];
 
 export default keys;

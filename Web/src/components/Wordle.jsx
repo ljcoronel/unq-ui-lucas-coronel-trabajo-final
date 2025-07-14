@@ -7,6 +7,7 @@ import GameOver from "./GameOver.jsx";
 import GameError from "./GameError.jsx";
 import GameLoading from "./GameLoading.jsx";
 import GenericError from "./GenericError.jsx";
+import Keypad from "./Keypad.jsx";
 
 function Wordle() {
     const { session , turn, isCorrect, handleKeyup, newGame, loading } = useWordleContext();
@@ -29,7 +30,12 @@ function Wordle() {
     return (
         <div>
             <DifficultySelection handleDifficulty={handleDifficulty} />
-            {session && <Grid />}
+            {session && (
+                <div>
+                    <Grid />
+                    <Keypad />
+                </div>
+            )}
             <GameLoading />
             <GameOver handleDifficulty={handleDifficulty} />
             <GameError />

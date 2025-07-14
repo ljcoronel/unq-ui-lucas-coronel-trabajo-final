@@ -2,16 +2,17 @@ import keys from "../constants/keys.js";
 import {useWordleContext} from "../hooks/useWordleContext.jsx";
 
 function Keypad() {
-    const { usedKeys } = useWordleContext();
+    const { usedKeys, loading, handleKeyup } = useWordleContext();
 
     return (
         <div className="keypad">
             {keys.map((l) => {
-                const solution = usedKeys[l.key];
+                const letter = l.key.toLowerCase();
+                const solution = usedKeys[letter];
                 return (
-                    <div key={l.key} className={solution}>
-                        {l.key}
-                    </div>
+                    <button key={l.key} className={solution} onClick={() => handleKeyup({ key: l.key })} disabled={loading}>
+                        {(l.key === "Enter") ? "⏎" : (l.key === "Backspace") ? "⌫" : l.key}
+                    </button>
                 );
             })}
         </div>
