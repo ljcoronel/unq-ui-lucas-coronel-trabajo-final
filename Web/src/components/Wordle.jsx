@@ -1,13 +1,16 @@
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import Api from "../services/Api.js";
 import {useWordleContext} from "../hooks/useWordleContext.jsx";
 import Grid from "./Grid.jsx";
 import DifficultySelection from "./DifficultySelection.jsx";
 import GameOver from "./GameOver.jsx";
 import GameError from "./GameError.jsx";
+import GameLoading from "./GameLoading.jsx";
+import GenericError from "./GenericError.jsx";
 
 function Wordle() {
     const { session , turn, isCorrect, handleKeyup, newGame, loading } = useWordleContext();
+    const { error, setError } = useState(null);
 
     useEffect(() => {
         document.addEventListener("keyup", handleKeyup);
@@ -20,15 +23,17 @@ function Wordle() {
     const handleDifficulty = (id) => {
         Api.getGameSession(id)
             .then((response) => newGame(response))
-            .catch(e => console.log(e.message));
+            .catch(e => setError(e));
     };
 
     return (
         <div>
             <DifficultySelection handleDifficulty={handleDifficulty} />
             {session && <Grid />}
+            <GameLoading />
             <GameOver handleDifficulty={handleDifficulty} />
             <GameError />
+            <GenericError error={error} />
         </div>
     )
 }
