@@ -5,10 +5,7 @@ function RestartGame({ onClick }) {
 
     return (
         <div>
-            <div>¿Volver a jugar en dificultad {session.difficulty.name}?</div>
-            <div>
-                <button type="button" className="btn btn-primary" onClick={onClick}>Reiniciar</button>
-            </div>
+            <button type="button" className="btn btn-primary" onClick={onClick}>Reiniciar en {session.difficulty.name}</button>
         </div>
     );
 }
