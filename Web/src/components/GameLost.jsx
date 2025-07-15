@@ -5,8 +5,8 @@ function GameLost({ handleDifficulty }) {
     const { session } = useWordleContext();
 
     return (
-        <div className="modal show fade d-block" tabIndex="-1" role="dialog">
-            <div className="modal-dialog" role="document">
+        <div className="modal show fade d-block" tabIndex="-1">
+            <div className="modal-dialog">
                 <div className="modal-content">
                     <div className="modal-header bg-danger text-white">
                         <h5 className="modal-title">¡Perdiste!</h5>

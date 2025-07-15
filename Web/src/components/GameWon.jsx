@@ -3,12 +3,12 @@ import RestartGame from "./RestartGame.jsx";
 import Confetti from "react-confetti";
 
 function GameWon({ handleDifficulty }) {
-    const { session } = useWordleContext();
+    const { turn, session } = useWordleContext();
 
     return (
         <div>
-            <div className="modal show fade d-block" tabIndex="-1" role="dialog">
-                <div className="modal-dialog" role="document">
+            <div className="modal show fade d-block" tabIndex="-1">
+                <div className="modal-dialog">
                     <div className="modal-content">
                         <div className="modal-header bg-success text-white">
                             <h5 className="modal-title">¡Ganaste! 🏆</h5>

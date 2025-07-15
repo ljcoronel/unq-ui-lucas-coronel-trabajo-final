@@ -13,8 +13,8 @@ function GameOver() {
     return (
         <div>
             {error && showError && (
-                <div className="modal show fade d-block" tabIndex="-1" role="dialog">
-                    <div className="modal-dialog" role="document">
+                <div className="modal show fade d-block" tabIndex="-1">
+                    <div className="modal-dialog">
                         <div className="modal-content">
                             <div className="modal-header bg-warning text-white">
                                 <h5 className="modal-title">Error</h5>
