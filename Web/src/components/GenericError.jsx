@@ -2,7 +2,7 @@ function GenericError({ error }) {
     return (
         <div>
             {error && (
-                <h1>{error.message}</h1>
+                <h1 className="text-uppercase text-bg-danger">{error.message}</h1>
             )}
         </div>
     );
