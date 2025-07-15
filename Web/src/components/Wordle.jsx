@@ -27,6 +27,12 @@ function Wordle() {
             .catch(e => setError(e));
     };
 
+    if (error) {
+        return (
+            <GenericError error={error} />
+        );
+    }
+
     return (
         <div>
             <DifficultySelection handleDifficulty={handleDifficulty} />
@@ -39,7 +45,6 @@ function Wordle() {
             <GameLoading />
             <GameOver handleDifficulty={handleDifficulty} />
             <GameError />
-            <GenericError error={error} />
         </div>
     )
 }

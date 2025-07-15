@@ -29,6 +29,12 @@ function DifficultySelection({ handleDifficulty }) {
         );
     }
 
+    if (error) {
+        return (
+            <GenericError error={error} />
+        );
+    }
+
     return (
         <div>
             <div className="fs-5">Seleccionar dificultad</div>
@@ -39,7 +45,6 @@ function DifficultySelection({ handleDifficulty }) {
                     </button>
                 ))}
             </div>
-            <GenericError error={error} />
         </div>
     );
 }
