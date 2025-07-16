@@ -2,14 +2,14 @@ import {useEffect, useState} from "react";
 import {useWordleContext} from "../hooks/useWordleContext.jsx";
 
 function GameError() {
-    const { gameMessage, newMessage } = useWordleContext();
+    const { gameMessage, resetMessage } = useWordleContext();
     const [showMessage, setShowMessage] = useState(false);
 
     useEffect(() => {
         setShowMessage(true);
         setTimeout(() => {
             setShowMessage(false);
-            newMessage("");
+            resetMessage();
         }, 2000);
     }, [gameMessage]);
 

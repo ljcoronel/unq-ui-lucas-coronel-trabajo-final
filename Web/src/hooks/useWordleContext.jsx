@@ -13,8 +13,8 @@ const WordleContext = createContext({
     error: null,
     handleKeyup: () => null,
     handleDifficulty: () => null,
+    resetMessage: () => null,
     triggerError: () => null,
-    newMessage: () => null,
 });
 
 export const WordleProvider = ({ children }) => {
@@ -92,9 +92,11 @@ export const WordleProvider = ({ children }) => {
     };
 
     const handleDifficulty = (id) => {
+        setLoading(true);
         Api.getGameSession(id)
             .then((response) => newGame(response))
-            .catch(e => setError(e));
+            .catch(e => setError(e))
+            .finally(() => setLoading(false));
     };
 
     const newGame = (session) => {
@@ -110,17 +112,17 @@ export const WordleProvider = ({ children }) => {
         setError(null);
     };
 
+    const resetMessage = () => {
+        setGameMessage("");
+    }
+
     const triggerError = (error) => {
         setError(error);
     }
 
-    const newMessage = (message) => {
-        setGameMessage(message);
-    }
-
     return (
         <WordleContext.Provider
-            value={{ session, turn, currentGuess, guesses, isCorrect, usedKeys, loading, gameMessage, error, handleKeyup, handleDifficulty, triggerError, newMessage }}>
+            value={{ session, turn, currentGuess, guesses, isCorrect, usedKeys, loading, gameMessage, error, handleKeyup, handleDifficulty, resetMessage, triggerError }}>
             {children}
         </WordleContext.Provider>
     );
