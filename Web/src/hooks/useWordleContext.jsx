@@ -39,7 +39,6 @@ export const WordleProvider = ({ children }) => {
                 setGameMessage("Una palabra demasiado corta");
                 return;
             }
-            setLoading(true);
             addNewGuess();
         }
         if (key === "Backspace") {
@@ -54,41 +53,44 @@ export const WordleProvider = ({ children }) => {
     };
 
     const addNewGuess = () => {
+        setLoading(true);
         Api.checkWord(session.sessionId, currentGuess.toLowerCase())
-            .then((response) => {
-                setGuesses((prevGuesses) => {
-                    const newGuesses = [...prevGuesses];
-                    newGuesses[turn] = response;
-                    return newGuesses;
-                })
-                setIsCorrect(response.every((l) => l.solution === "correct"));
-                setHistory((prevHistory) => {
-                    return [...prevHistory, currentGuess];
-                });
-                setTurn((prevTurn) => {
-                    return (prevTurn + 1);
-                });
-                setUsedKeys((prevUsedKeys) => {
-                    response.forEach((l) => {
-                        const currentSolution = prevUsedKeys[l.letter];
-                        if (l.solution === "correct") {
-                            prevUsedKeys[l.letter] = "correct";
-                            return;
-                        }
-                        if (l.solution === "elsewhere" && currentSolution !== "correct") {
-                            prevUsedKeys[l.letter] = "elsewhere";
-                            return;
-                        }
-                        if (l.solution === "absent" && currentSolution !== ("correct" || "elsewhere")) {
-                            prevUsedKeys[l.letter] = "absent";
-                        }
-                    })
-                    return prevUsedKeys;
-                })
-                setCurrentGuess("");
-            })
+            .then((response) => handleWord(response))
             .catch((e) => (e.message === "Palabra incorrecta") ? setGameMessage(e.message) : setError(e))
             .finally(() => setLoading(false));
+    };
+
+    const handleWord = (response) => {
+        setGuesses((prevGuesses) => {
+            const newGuesses = [...prevGuesses];
+            newGuesses[turn] = response;
+            return newGuesses;
+        });
+        setIsCorrect(response.every((l) => l.solution === "correct"));
+        setHistory((prevHistory) => {
+            return [...prevHistory, currentGuess];
+        });
+        setTurn((prevTurn) => {
+            return (prevTurn + 1);
+        });
+        setUsedKeys((prevUsedKeys) => {
+            response.forEach((l) => {
+                const currentSolution = prevUsedKeys[l.letter];
+                if (l.solution === "correct") {
+                    prevUsedKeys[l.letter] = "correct";
+                    return;
+                }
+                if (l.solution === "elsewhere" && currentSolution !== "correct") {
+                    prevUsedKeys[l.letter] = "elsewhere";
+                    return;
+                }
+                if (l.solution === "absent" && currentSolution !== "correct" && currentSolution !== "elsewhere") {
+                    prevUsedKeys[l.letter] = "absent";
+                }
+            });
+            return prevUsedKeys;
+        });
+        setCurrentGuess("");
     };
 
     const handleDifficulty = (id) => {
@@ -114,15 +116,29 @@ export const WordleProvider = ({ children }) => {
 
     const resetMessage = () => {
         setGameMessage("");
-    }
+    };
 
     const triggerError = (error) => {
         setError(error);
-    }
+    };
 
     return (
         <WordleContext.Provider
-            value={{ session, turn, currentGuess, guesses, isCorrect, usedKeys, loading, gameMessage, error, handleKeyup, handleDifficulty, resetMessage, triggerError }}>
+            value={{
+                session,
+                turn,
+                currentGuess,
+                guesses,
+                isCorrect,
+                usedKeys,
+                loading,
+                gameMessage,
+                error,
+                handleKeyup,
+                handleDifficulty,
+                resetMessage,
+                triggerError
+        }}>
             {children}
         </WordleContext.Provider>
     );
