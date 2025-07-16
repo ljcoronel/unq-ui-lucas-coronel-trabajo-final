@@ -2,8 +2,8 @@ import {useWordleContext} from "../hooks/useWordleContext.jsx";
 import RestartGame from "./RestartGame.jsx";
 import Confetti from "react-confetti";
 
-function GameWon({ handleDifficulty }) {
-    const { turn, session } = useWordleContext();
+function GameWon() {
+    const { turn, session, handleDifficulty } = useWordleContext();
 
     return (
         <div>

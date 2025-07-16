@@ -6,25 +6,52 @@ const WordleContext = createContext({
     turn: 0,
     currentGuess: "",
     guesses: [...Array(6)],
-    history: [],
     isCorrect: false,
     usedKeys: {},
     loading: false,
     gameMessage: "",
     error: null,
+    handleKeyup: () => null,
+    handleDifficulty: () => null,
+    triggerError: () => null,
+    newMessage: () => null,
 });
 
 export const WordleProvider = ({ children }) => {
     const [session, setSession] = useState(null);
-    const [turn, setTurn] = useState(0); //turno del 0 al 5
-    const [currentGuess, setCurrentGuess] = useState(""); //la palabra
+    const [turn, setTurn] = useState(0);
+    const [currentGuess, setCurrentGuess] = useState("");
     const [guesses, setGuesses] = useState([...Array(6)]); //la estructura de la palabra por api
-    const [history, setHistory] = useState([]); //lista de palabras usadas
+    const [history, setHistory] = useState([]);
     const [isCorrect, setIsCorrect] = useState(false);
     const [usedKeys, setUsedKeys] = useState({});
     const [loading, setLoading] = useState(false);
     const [gameMessage, setGameMessage] = useState("");
     const [error, setError] = useState(null);
+
+    const handleKeyup = ({ key }) => {
+        if (key === "Enter") {
+            if (history.includes(currentGuess.toLowerCase())) {
+                setGameMessage("Ya usaste esta palabra");
+                return;
+            }
+            if (currentGuess.length !== session.wordLenght) {
+                setGameMessage("Una palabra demasiado corta");
+                return;
+            }
+            setLoading(true);
+            addNewGuess();
+        }
+        if (key === "Backspace") {
+            setCurrentGuess((prev) => prev.slice(0, -1));
+            return;
+        }
+        if (/^[A-Za-zÑñ]$/.test(key)) {
+            if (currentGuess.length < session.wordLenght) {
+                setCurrentGuess(prev => prev + key);
+            }
+        }
+    };
 
     const addNewGuess = () => {
         Api.checkWord(session.sessionId, currentGuess.toLowerCase())
@@ -64,28 +91,10 @@ export const WordleProvider = ({ children }) => {
             .finally(() => setLoading(false));
     };
 
-    const handleKeyup = ({ key }) => {
-        if (key === "Enter") {
-            if (history.includes(currentGuess.toLowerCase())) {
-                setGameMessage("Ya usaste esta palabra");
-                return;
-            }
-            if (currentGuess.length !== session.wordLenght) {
-                setGameMessage("Una palabra demasiado corta");
-                return;
-            }
-            setLoading(true);
-            addNewGuess();
-        }
-        if (key === "Backspace") {
-            setCurrentGuess((prev) => prev.slice(0, -1));
-            return;
-        }
-        if (/^[A-Za-zÑñ]$/.test(key)) {
-            if (currentGuess.length < session.wordLenght) {
-                setCurrentGuess(prev => prev + key);
-            }
-        }
+    const handleDifficulty = (id) => {
+        Api.getGameSession(id)
+            .then((response) => newGame(response))
+            .catch(e => setError(e));
     };
 
     const newGame = (session) => {
@@ -101,8 +110,17 @@ export const WordleProvider = ({ children }) => {
         setError(null);
     };
 
+    const triggerError = (error) => {
+        setError(error);
+    }
+
+    const newMessage = (message) => {
+        setGameMessage(message);
+    }
+
     return (
-        <WordleContext.Provider value={{ session, turn, currentGuess, guesses, isCorrect, handleKeyup, newGame, usedKeys, loading, error, gameMessage }}>
+        <WordleContext.Provider
+            value={{ session, turn, currentGuess, guesses, isCorrect, usedKeys, loading, gameMessage, error, handleKeyup, handleDifficulty, triggerError, newMessage }}>
             {children}
         </WordleContext.Provider>
     );

@@ -2,13 +2,13 @@ import {useWordleContext} from "../hooks/useWordleContext.jsx";
 import GameWon from "./GameWon.jsx";
 import GameLost from "./GameLost.jsx";
 
-function GameOver({ handleDifficulty }) {
+function GameOver() {
     const { isCorrect, turn } = useWordleContext();
 
     return (
         <div>
-            {isCorrect && <GameWon handleDifficulty={handleDifficulty} />}
-            {!isCorrect && turn > 5 && <GameLost handleDifficulty={handleDifficulty} />}
+            {isCorrect && <GameWon />}
+            {!isCorrect && turn > 5 && <GameLost />}
         </div>
     );
 }

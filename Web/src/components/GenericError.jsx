@@ -1,4 +1,8 @@
-function GenericError({ error }) {
+import {useWordleContext} from "../hooks/useWordleContext.jsx";
+
+function GenericError() {
+    const { error } = useWordleContext();
+
     return (
         <div>
             {error && (

@@ -1,18 +1,16 @@
+import {useEffect, useState} from "react";
 import {useWordleContext} from "../hooks/useWordleContext.jsx";
 import Api from "../services/Api.js";
-import {useEffect, useState} from "react";
-import GenericError from "./GenericError.jsx";
 
-function DifficultySelection({ handleDifficulty }) {
-    const { loading } = useWordleContext();
+function DifficultySelection() {
+    const { loading, handleDifficulty, triggerError } = useWordleContext();
     const [difficulties, setDifficulties] = useState([]);
     const [screenLoading, setScreenLoading] = useState(true);
-    const [error, setError] = useState(null);
 
     useEffect(() => {
         Api.getDifficulties()
             .then(response => setDifficulties(response))
-            .catch(e => setError(e))
+            .catch(e => triggerError(e))
             .finally(() => setScreenLoading(false));
     }, []);
 
@@ -26,12 +24,6 @@ function DifficultySelection({ handleDifficulty }) {
             <div className="spinner-border text-primary" role="status">
                 <span className="visually-hidden">Loading...</span>
             </div>
-        );
-    }
-
-    if (error) {
-        return (
-            <GenericError error={error} />
         );
     }
 

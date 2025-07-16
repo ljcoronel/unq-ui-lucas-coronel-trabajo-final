@@ -1,8 +1,8 @@
 import {useWordleContext} from "../hooks/useWordleContext.jsx";
 import RestartGame from "./RestartGame.jsx";
 
-function GameLost({ handleDifficulty }) {
-    const { session } = useWordleContext();
+function GameLost() {
+    const { session, handleDifficulty } = useWordleContext();
 
     return (
         <div className="modal show fade d-block" tabIndex="-1">

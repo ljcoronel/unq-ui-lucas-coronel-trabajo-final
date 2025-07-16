@@ -1,5 +1,5 @@
-import keys from "../constants/keys.js";
 import {useWordleContext} from "../hooks/useWordleContext.jsx";
+import keys from "../constants/keys.js";
 
 function Keypad() {
     const { usedKeys, loading, handleKeyup } = useWordleContext();
