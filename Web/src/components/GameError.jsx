@@ -1,18 +1,18 @@
 import {useWordleContext} from "../hooks/useWordleContext.jsx";
 import {useEffect, useState} from "react";
 
-function GameOver() {
-    const { error } = useWordleContext();
-    const [showError, setShowError] = useState(false);
+function GameError() {
+    const { gameMessage } = useWordleContext();
+    const [showMessage, setShowMessage] = useState(false);
 
     useEffect(() => {
-        setShowError(true);
-        setTimeout(() => setShowError(false), 2000);
-    }, [error]);
+        setShowMessage(true);
+        setTimeout(() => setShowMessage(false), 2000);
+    }, [gameMessage]);
 
     return (
         <div>
-            {error && showError && (
+            {gameMessage && showMessage && (
                 <div className="modal show fade d-block" tabIndex="-1">
                     <div className="modal-dialog">
                         <div className="modal-content">
@@ -20,7 +20,7 @@ function GameOver() {
                                 <h5 className="modal-title">Error</h5>
                             </div>
                             <div className="modal-body">
-                                <p>{error.message}</p>
+                                <p>{gameMessage}</p>
                             </div>
                         </div>
                     </div>
@@ -30,4 +30,4 @@ function GameOver() {
     );
 }
 
-export default GameOver;
+export default GameError;

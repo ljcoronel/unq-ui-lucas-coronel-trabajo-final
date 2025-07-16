@@ -10,6 +10,7 @@ const WordleContext = createContext({
     isCorrect: false,
     usedKeys: {},
     loading: false,
+    gameMessage: "",
     error: null,
 });
 
@@ -22,6 +23,7 @@ export const WordleProvider = ({ children }) => {
     const [isCorrect, setIsCorrect] = useState(false);
     const [usedKeys, setUsedKeys] = useState({});
     const [loading, setLoading] = useState(false);
+    const [gameMessage, setGameMessage] = useState("");
     const [error, setError] = useState(null);
 
     const addNewGuess = () => {
@@ -58,18 +60,18 @@ export const WordleProvider = ({ children }) => {
                 })
                 setCurrentGuess("");
             })
-            .catch((e) => setError(e))
+            .catch((e) => (e.message === "Palabra incorrecta") ? setGameMessage(e.message) : setError(e))
             .finally(() => setLoading(false));
     };
 
     const handleKeyup = ({ key }) => {
         if (key === "Enter") {
             if (history.includes(currentGuess.toLowerCase())) {
-                setError(new Error("Ya usaste esta palabra"));
+                setGameMessage("Ya usaste esta palabra");
                 return;
             }
             if (currentGuess.length !== session.wordLenght) {
-                setError(new Error("Una palabra demasiado corta"));
+                setGameMessage("Una palabra demasiado corta");
                 return;
             }
             setLoading(true);
@@ -95,11 +97,12 @@ export const WordleProvider = ({ children }) => {
         setIsCorrect(false);
         setUsedKeys({});
         setLoading(false);
+        setGameMessage("");
         setError(null);
     };
 
     return (
-        <WordleContext.Provider value={{ session, turn, currentGuess, guesses, isCorrect, handleKeyup, newGame, usedKeys, loading, error }}>
+        <WordleContext.Provider value={{ session, turn, currentGuess, guesses, isCorrect, handleKeyup, newGame, usedKeys, loading, error, gameMessage }}>
             {children}
         </WordleContext.Provider>
     );
