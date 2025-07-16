@@ -14,7 +14,7 @@ const WordleContext = createContext({
     handleKeyup: () => null,
     handleDifficulty: () => null,
     resetMessage: () => null,
-    triggerError: () => null,
+    setError: () => null,
 });
 
 export const WordleProvider = ({ children }) => {
@@ -30,6 +30,7 @@ export const WordleProvider = ({ children }) => {
     const [error, setError] = useState(null);
 
     const handleKeyup = ({ key }) => {
+        console.log(key);
         if (key === "Enter") {
             if (history.includes(currentGuess.toLowerCase())) {
                 setGameMessage("Ya usaste esta palabra");
@@ -118,10 +119,6 @@ export const WordleProvider = ({ children }) => {
         setGameMessage("");
     };
 
-    const triggerError = (error) => {
-        setError(error);
-    };
-
     return (
         <WordleContext.Provider
             value={{
@@ -137,7 +134,7 @@ export const WordleProvider = ({ children }) => {
                 handleKeyup,
                 handleDifficulty,
                 resetMessage,
-                triggerError
+                setError
         }}>
             {children}
         </WordleContext.Provider>

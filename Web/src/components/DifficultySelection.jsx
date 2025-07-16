@@ -3,14 +3,14 @@ import {useWordleContext} from "../hooks/useWordleContext.jsx";
 import Api from "../services/Api.js";
 
 function DifficultySelection() {
-    const { loading, handleDifficulty, triggerError } = useWordleContext();
+    const { loading, handleDifficulty, setError } = useWordleContext();
     const [difficulties, setDifficulties] = useState([]);
     const [screenLoading, setScreenLoading] = useState(true);
 
     useEffect(() => {
         Api.getDifficulties()
             .then(response => setDifficulties(response))
-            .catch(e => triggerError(e))
+            .catch(e => setError(e))
             .finally(() => setScreenLoading(false));
     }, []);
 
