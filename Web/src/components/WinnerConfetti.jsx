@@ -6,8 +6,8 @@ function WinnerConfetti() {
 
     useEffect(() => {
         const handleResize = () => setDimensions({ width: window.innerWidth, height: window.innerHeight });
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
+        document.addEventListener('resize', handleResize);
+        return () => document.removeEventListener('resize', handleResize);
     }, []);
 
     return (
