@@ -1,4 +1,4 @@
-import {createContext, useContext, useState} from "react";
+import { createContext, useContext, useState } from "react";
 import Api from "../services/Api.js";
 
 const WordleContext = createContext({

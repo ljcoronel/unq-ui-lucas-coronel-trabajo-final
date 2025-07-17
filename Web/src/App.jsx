@@ -1,5 +1,5 @@
 import './App.css';
-import {WordleProvider} from "./hooks/useWordleContext.jsx";
+import { WordleProvider } from "./hooks/useWordleContext.jsx";
 import Wordle from "./components/Wordle.jsx";
 
 function App() {
