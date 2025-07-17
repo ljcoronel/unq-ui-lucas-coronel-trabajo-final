@@ -1,5 +1,5 @@
-import {useEffect} from "react";
-import {useWordleContext} from "../hooks/useWordleContext.jsx";
+import { useEffect } from "react";
+import { useWordleContext } from "../hooks/useWordleContext.jsx";
 import GameHeader from "./GameHeader.jsx";
 import DifficultySelection from "./DifficultySelection.jsx";
 import Grid from "./Grid.jsx";

@@ -1,4 +1,4 @@
-import {useWordleContext} from "../hooks/useWordleContext.jsx";
+import { useWordleContext } from "../hooks/useWordleContext.jsx";
 
 function GameLoading() {
     const { loading } = useWordleContext();
@@ -13,7 +13,7 @@ function GameLoading() {
                                 <h5 className="modal-title">Cargando</h5>
                             </div>
                             <div className="modal-body">
-                                <p>Por favor espere</p>
+                                <p>Por favor espere.</p>
                             </div>
                         </div>
                     </div>

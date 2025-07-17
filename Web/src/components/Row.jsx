@@ -1,4 +1,4 @@
-import {useWordleContext} from "../hooks/useWordleContext.jsx";
+import { useWordleContext } from "../hooks/useWordleContext.jsx";
 import PastRow from "./PastRow.jsx";
 import CurrentRow from "./CurrentRow.jsx";
 

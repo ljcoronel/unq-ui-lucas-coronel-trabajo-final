@@ -1,4 +1,4 @@
-import {useWordleContext} from "../hooks/useWordleContext.jsx";
+import { useWordleContext } from "../hooks/useWordleContext.jsx";
 import GameWon from "./GameWon.jsx";
 import GameLost from "./GameLost.jsx";
 

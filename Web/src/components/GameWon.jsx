@@ -1,4 +1,4 @@
-import {useWordleContext} from "../hooks/useWordleContext.jsx";
+import { useWordleContext } from "../hooks/useWordleContext.jsx";
 import RestartGame from "./RestartGame.jsx";
 import Confetti from "react-confetti";
 
@@ -14,7 +14,7 @@ function GameWon() {
                             <h5 className="modal-title">¡Ganaste! 🏆</h5>
                         </div>
                         <div className="modal-body">
-                            <p>Adivinaste la palabra en {turn} {turn === 1 ? "intento" : "intentos"}</p>
+                            <p>Adivinaste la palabra en {turn} {turn === 1 ? "intento" : "intentos"}.</p>
                         </div>
                         <div className="modal-footer">
                             <RestartGame onClick={() => handleDifficulty(session.difficulty.id)} />

@@ -1,5 +1,5 @@
-import {useEffect, useState} from "react";
-import {useWordleContext} from "../hooks/useWordleContext.jsx";
+import { useEffect, useState } from "react";
+import { useWordleContext } from "../hooks/useWordleContext.jsx";
 import Api from "../services/Api.js";
 
 function DifficultySelection() {
@@ -29,8 +29,8 @@ function DifficultySelection() {
 
     return (
         <div>
-            <div className="fs-5">Seleccionar dificultad</div>
-            <div className="btn-group mb-3">
+            <p className="fs-5">Seleccionar dificultad</p>
+            <div className="btn-group mb-2">
                 {difficulties.map((difficulty) => (
                     <button key={difficulty.id} type="button" className="btn btn-primary" disabled={loading} onClick={(e) => handleClick(e, difficulty.id)}>
                         {difficulty.name}

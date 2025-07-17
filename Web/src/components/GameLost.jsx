@@ -1,4 +1,4 @@
-import {useWordleContext} from "../hooks/useWordleContext.jsx";
+import { useWordleContext } from "../hooks/useWordleContext.jsx";
 import RestartGame from "./RestartGame.jsx";
 
 function GameLost() {
@@ -12,7 +12,7 @@ function GameLost() {
                         <h5 className="modal-title">¡Perdiste!</h5>
                     </div>
                     <div className="modal-body">
-                        <p>Usaste los 6 intentos</p>
+                        <p>Usaste los 6 intentos.</p>
                     </div>
                     <div className="modal-footer">
                         <RestartGame onClick={() => handleDifficulty(session.difficulty.id)} />

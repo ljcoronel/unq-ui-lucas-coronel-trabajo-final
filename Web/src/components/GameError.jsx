@@ -1,5 +1,5 @@
-import {useEffect, useState} from "react";
-import {useWordleContext} from "../hooks/useWordleContext.jsx";
+import { useEffect, useState } from "react";
+import { useWordleContext } from "../hooks/useWordleContext.jsx";
 
 function GameError() {
     const { gameMessage, resetMessage } = useWordleContext();
@@ -23,7 +23,7 @@ function GameError() {
                                 <h5 className="modal-title">Error</h5>
                             </div>
                             <div className="modal-body">
-                                <p>{gameMessage}</p>
+                                <p>{gameMessage}.</p>
                             </div>
                         </div>
                     </div>

@@ -1,5 +1,5 @@
 import KeyList from "./KeyList.jsx";
-import {keys1, keys2, keys3} from "../constants/keys.js";
+import { keys1, keys2, keys3 } from "../constants/keys.js";
 
 function Keypad() {
     return (
