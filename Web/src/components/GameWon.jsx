@@ -1,6 +1,6 @@
 import {useWordleContext} from "../hooks/useWordleContext.jsx";
 import RestartGame from "./RestartGame.jsx";
-import WinnerConfetti from "./WinnerConfetti.jsx";
+import Confetti from "react-confetti";
 
 function GameWon() {
     const { turn, session, handleDifficulty } = useWordleContext();
@@ -22,7 +22,7 @@ function GameWon() {
                     </div>
                 </div>
             </div>
-            <WinnerConfetti />
+            <Confetti />
         </div>
     );
 }

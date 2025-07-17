@@ -21,7 +21,7 @@ export const WordleProvider = ({ children }) => {
     const [session, setSession] = useState(null);
     const [turn, setTurn] = useState(0);
     const [currentGuess, setCurrentGuess] = useState("");
-    const [guesses, setGuesses] = useState([...Array(6)]); //la estructura de la palabra por api
+    const [guesses, setGuesses] = useState([...Array(6)]);
     const [history, setHistory] = useState([]);
     const [isCorrect, setIsCorrect] = useState(false);
     const [usedKeys, setUsedKeys] = useState({});
@@ -30,7 +30,6 @@ export const WordleProvider = ({ children }) => {
     const [error, setError] = useState(null);
 
     const handleKeyup = ({ key }) => {
-        console.log(key);
         if (key === "Enter") {
             if (history.includes(currentGuess.toLowerCase())) {
                 setGameMessage("Ya usaste esta palabra");

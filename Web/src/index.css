@@ -89,7 +89,7 @@
 }
 .keypad {
   max-width: 500px;
-  margin: 20px auto;
+  margin: auto;
 }
 .keypad > button {
   margin: 5px;
@@ -99,6 +99,9 @@
   display: inline-block;
   border-radius: 6px;
   line-height: 50px;
+}
+.keypad-row {
+  justify-content: center;
 }
 .keypad > button.correct {
   background: #5ac85a;
@@ -115,3 +118,19 @@
    color: #fff;
    transition: all 0.3s ease-in;
  }
+@media (max-width: 500px) {
+  .row > div {
+    width: 40px;
+    height: 40px;
+    font-size: 1.5em;
+    line-height: 40px;
+  }
+}
+@media (max-width: 540px) {
+  .keypad > button {
+    width: 30px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 0.8em;
+  }
+}

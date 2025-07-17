@@ -3,6 +3,7 @@ import {useWordleContext} from "../hooks/useWordleContext.jsx";
 import GameHeader from "./GameHeader.jsx";
 import DifficultySelection from "./DifficultySelection.jsx";
 import Grid from "./Grid.jsx";
+import Keypad from "./Keypad.jsx";
 import GameLoading from "./GameLoading.jsx";
 import GameError from "./GameError.jsx";
 import GameOver from "./GameOver.jsx";
@@ -29,12 +30,17 @@ function Wordle() {
         <div>
             <GameHeader />
             <DifficultySelection />
-            {session && <Grid />}
+            {session && (
+                <div>
+                    <Grid />
+                    <Keypad />
+                </div>
+            )}
             <GameLoading />
             <GameError />
             <GameOver />
         </div>
-    )
+    );
 }
 
 export default Wordle;
