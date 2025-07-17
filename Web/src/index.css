@@ -101,6 +101,7 @@
   line-height: 50px;
 }
 .keypad-row {
+  display: flex;
   justify-content: center;
 }
 .keypad > button.correct {
